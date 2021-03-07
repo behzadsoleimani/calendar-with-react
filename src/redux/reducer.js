@@ -1,7 +1,7 @@
 const reducer = (state, action) => {
   switch (action.type) {
     case "SET-TASKS":
-      return { ...state, tasks: [...state.tasks, action.payload] };
+        return { ...state, tasks: [...state.tasks, action.payload] };
 
     case "EDIT-TASKS":
       const modifyTasks = [
@@ -11,7 +11,8 @@ const reducer = (state, action) => {
       ];
 
       return { ...state, tasks: modifyTasks };
-
+      case "GET-TASKS":
+          return { ...state, tasks: action.payload};
     default:
       return state;
   }

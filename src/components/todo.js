@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -11,15 +11,18 @@ import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { useDispatch, useSelector } from "react-redux";
-import {setTask , editTask} from "../redux/action"
+import { editTask, postItems, fetchItems } from "../redux/action";
 
 function TODO() {
   const [open, setOpen] = React.useState(false);
   const [dateValue, setDateValue] = React.useState("");
   const [taskValue, setTaskValue] = React.useState("");
   const dispatch = useDispatch();
-  const tasks = useSelector(state => state.tasks)
+  const tasks = useSelector(state => state.tasks);
 
+  useEffect(() => {
+    dispatch(fetchItems());
+  }, []);
   const handleClickOpen = () => {
     setOpen(true);
     setDateValue("");
@@ -32,22 +35,23 @@ function TODO() {
 
   const handleAddClose = () => {
     setOpen(false);
-    dispatch(setTask({
-      task: taskValue,
-      date: dateValue,
-      completed: false,
-      id: new Date().getMilliseconds(),
-    }));
-
+    dispatch(
+      postItems({
+        task: taskValue,
+        date: dateValue,
+        completed: false,
+        id: new Date().getMilliseconds()
+      })
+    );
   };
 
-  const handleChangeRadio = (e , task) => {
-    if(e.target.checked){
+  const handleChangeRadio = (e, task) => {
+    if (e.target.checked) {
       const index = tasks.findIndex(i => i.id === task.id);
 
-      dispatch(editTask(task, index))
+      dispatch(editTask(task, index));
     }
-  }
+  };
 
   const handelChaneText = (event, name) => {
     if (name === "date") {
@@ -56,7 +60,6 @@ function TODO() {
       setTaskValue(event.target.value);
     }
   };
-
 
   return (
     <div
@@ -85,14 +88,17 @@ function TODO() {
 
       <FormControl component="fieldset">
         <RadioGroup aria-label="gender" name="gender1">
-          {tasks.map(task => (
-            !task.completed && <FormControlLabel
-              value={task.task}
-              control={<Radio />}
-              label={task.task}
-              onChange={(e) => handleChangeRadio(e , task)}
-            />
-          ))}
+          {tasks.map(
+            task =>
+              !task.completed && (
+                <FormControlLabel
+                  value={task.task}
+                  control={<Radio />}
+                  label={task.task}
+                  onChange={e => handleChangeRadio(e, task)}
+                />
+              )
+          )}
         </RadioGroup>
       </FormControl>
 

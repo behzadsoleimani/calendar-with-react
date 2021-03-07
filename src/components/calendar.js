@@ -17,8 +17,7 @@ function Calendar({tasks}) {
           ];
           setArr(modifyArr)
     });
-    console.log(arr)
-
+    
 
   }, [tasks])
 
