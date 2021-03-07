@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  background: #cccccc3d;
+  padding: 20px;
+  border-radius: 50px
 }
 
 .App-logo {
@@ -35,4 +39,81 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.calendar-container {
+  display: block;
+  width: 100%;
+  text-align: right;
+  background: #b0ff002e;
+  border: 0;
+  flex-direction: column;
+}
+
+.ant-picker-date-panel {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-search > div {
+  border-radius: 30px !important
+}
+
+/* .ant-picker-body {
+  padding: 8px 0;
+} */
+
+.ant-picker-content {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  display: table;
+}
+
+thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: #ccc;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: #ccc;
+  border: 1px solid #ccc;
+}
+
+th {
+  height: auto;
+  padding: 10px 12px 10px 0;
+  line-height: 18px;
+  width: 36px;
+  text-align: center;
+}
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: #ccc;
+}
+
+td {
+  position: relative;
+  min-width: 24px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .85);
+  display: table-cell;
+  vertical-align: inherit;
+  text-align: center;
+    border: 1px solid #ccc;
+    height: 100px;
+    vertical-align: top;
+    padding: 2px;
+
+}
+
+fieldset span {
+  font-size: 13px !important;
 }
